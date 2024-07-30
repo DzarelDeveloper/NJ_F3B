@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title></title> 
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Open+Sans:wght@400;700&amp;display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+  <style>
+        body {
+            background: url('src/Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            padding: 10px;
+            flex-direction: column;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+        .player {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 250px;
+            width: 100%;
+            margin: 10px;
+        }
+        .player img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .player h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            margin: 5px 0;
+            color: black;
+        }
+        .player p {
+            margin: 5px 0;
+            color: black;
+            font-size: 14px;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .controls button {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+            color: black;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: gray;
+            border-radius: 5px;
+            margin: 0 5px;
+            position: relative;
+        }
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: black;
+            width: 0%; /* Initially set to 0% */
+            border-radius: 5px;
+        }
+        .footer {
+            margin-top: 50px; /* Adjust this value to move the button lower */
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer a i {
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+        .footer a span {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 16px;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="player"> 
+    <img src="src/Music-Pebi.jpg" alt=""> 
+    <h2>Pebi</h2> 
+    <p></p> 
+    <div class="progress"> <span id="current-time-1">00:00</span> 
+     <div class="progress-bar"> <span></span> 
+     </div> <span id="duration-1">00:00</span> 
+    </div> 
+    <div class="controls"> <button id="prev-1">◀◀</button> <button id="play-pause-1">▶</button> <button id="next-1">▶▶</button> 
+    </div> 
+    <audio id="audio-player-1" controls style="display: none;"> 
+     <source src="src/PebiFavMusic.mp3" type="audio/mpeg"> Your browser does not support the audio element. 
+    </audio> 
+   </div> 
+   <div class="player"> 
+    <img src="src/Music-Nje.jpg" alt=""> 
+    <h2>Nje</h2> 
+    <p></p> 
+    <div class="progress"> <span id="current-time-2">00:00</span> 
+     <div class="progress-bar"> <span></span> 
+     </div> <span id="duration-2">00:00</span> 
+    </div> 
+    <div class="controls"> <button id="prev-2">◀◀</button> <button id="play-pause-2">▶</button> <button id="next-2">▶▶</button> 
+    </div> 
+    <audio id="audio-player-2" controls style="display: none;"> 
+     <source src="src/NjeFavMusic.mp3" type="audio/mpeg"> Your browser does not support the audio element. 
+    </audio> 
+   </div> 
+  </div> 
+  <div class="footer"> 
+    <a href="Home.html"><i class="fas fa-arrow-left"></i><span>Kembali</span></a> 
+  </div> 
+  <script>
+        const players = [
+            {
+                audioPlayer: document.getElementById('audio-player-1'),
+                playButton: document.getElementById('play-pause-1'),
+                progressBar: document.querySelector('.player:nth-child(1) .progress-bar span'),
+                currentTimeDisplay: document.getElementById('current-time-1'),
+                durationDisplay: document.getElementById('duration-1')
+            },
+            {
+                audioPlayer: document.getElementById('audio-player-2'),
+                playButton: document.getElementById('play-pause-2'),
+                progressBar: document.querySelector('.player:nth-child(2) .progress-bar span'),
+                currentTimeDisplay: document.getElementById('current-time-2'),
+                durationDisplay: document.getElementById('duration-2')
+            }
+        ];
+
+        players.forEach(player => {
+            player.playButton.addEventListener('click', () => {
+                if (player.audioPlayer.paused) {
+                    player.audioPlayer.play();
+                    player.playButton.innerHTML = '&#10074;&#10074;'; // Pause icon
+                } else {
+                    player.audioPlayer.pause();
+                    player.playButton.innerHTML = '&#9654;'; // Play icon
+                }
+            });
+
+            player.audioPlayer.addEventListener('timeupdate', () => {
+                const currentTime = player.audioPlayer.currentTime;
+                const duration = player.audioPlayer.duration;
+                player.progressBar.style.width = `${(currentTime / duration) * 100}%`;
+
+                player.currentTimeDisplay.textContent = formatTime(currentTime);
+            });
+
+            player.audioPlayer.addEventListener('loadedmetadata', () => {
+                player.durationDisplay.textContent = formatTime(player.audioPlayer.duration);
+            });
+        });
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+    </script> 
+ </body>
+</html>
