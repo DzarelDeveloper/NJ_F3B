@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title></title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous"> 
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        
+        body {
+            background: url('src/Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Bebas Neue', cursive;
+        }
+        .container {
+            text-align: center;
+        }
+        .profile-container {
+            display: flex;
+            justify-content: center;
+        }
+        .profile-pic {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+        .short-text {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: white;
+            color: black;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 1em;
+        }
+        .timer {
+            margin-top: 20px;
+            font-size: 1.5em;
+            display: flex;
+            justify-content: center;
+        }
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+        }
+        .time-value {
+            font-size: 2em;
+        }
+        .time-label {
+            font-size: 0.8em;
+        }
+        .footer {
+            padding: 20px;
+            text-align: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+        }
+        .footer a i {
+            margin-bottom: 5px;
+        }
+        .footer a span {
+            font-size: 14px;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="profile-container"> 
+    <img src="src/profil.jpg" alt="Profile Picture" class="profile-pic"> 
+   </div> 
+   <div class="short-text">
+     Forever?
+   </div> 
+   <div class="timer" id="timer"></div> 
+  </div> 
+  <div class="footer"> <a href="Home.html"> <i class="fas fa-arrow-left"></i> <span>Kembali</span> </a> 
+  </div> 
+  <script>
+        const startDate = new Date("2023-07-21T00:00:00");
+
+        function updateTimer() {
+            const now = new Date();
+            const timeElapsed = now - startDate;
+
+            const days = Math.floor(timeElapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = `
+                <div class="time-unit">
+                    <div class="time-value">${days}</div>
+                    <div class="time-label">Days</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value">${hours}</div>
+                    <div class="time-label">Hours</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value">${minutes}</div>
+                    <div class="time-label">Minutes</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value">${seconds}</div>
+                    <div class="time-label">Seconds</div>
+                </div>
+            `;
+        }
+
+        setInterval(updateTimer, 1000);
+    </script> 
+ </body>
+</html>

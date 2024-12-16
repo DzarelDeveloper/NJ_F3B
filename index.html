@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title></title> 
+  <style>
+        @font-face {
+            font-family: 'PressStart2P';
+            src: url('https://fonts.cdnfonts.com/s/41630/PressStart2P-Regular.woff') format('woff');
+        }
+        body {
+            background: url('src/Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            font-family: 'PressStart2P', cursive;
+        }
+       .container {
+          text-align: center;
+          font-weight: 990;
+        }
+        .button {
+            background-color: #4b0082; /* Warna ungu */
+            color: white;
+            border: 2px solid #4b0082; /* Warna ungu */
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'PressStart2P', cursive;
+        }
+        .button:hover {
+            background-color: #2e004b; /* Warna ungu gelap */
+            transform: translateY(-2px);
+        }
+        .emoji {
+            font-size: 30px;
+            margin-top: 20px;
+        }
+    </style> 
+    <script>
+        function goToIndex() {
+            window.location.href = 'Home.html';
+        }
+    </script>
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="emoji">
+     ❤️❤️❤️❤️❤️ 
+   </div>
+   <p>LET'S PLAY WITH ME?</p> 
+   <button class="button" onclick="goToIndex()">START</button> 
+  </div> 
+ </body>
+</html>
